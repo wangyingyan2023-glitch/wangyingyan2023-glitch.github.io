@@ -1,0 +1,1714 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>中国色的诗意｜微课课后闯关</title>
+  <style>
+    :root{
+      --bg:#f6f1e7;
+      --paper:#fbf7ef;
+      --ink:#1e1b16;
+      --muted:#6f6457;
+      --gold:#b7924b;
+      --shadow: 0 14px 40px rgba(0,0,0,.10);
+      --radius: 18px;
+
+      /* 中国色 */
+      --yuebai:#dbe8f2;   /* 月白 */
+      --daiqing:#223a50;  /* 黛青 */
+      --yanzhi:#b5485a;   /* 胭脂 */
+      --xuanxun:#2b1f1a;  /* 玄 */
+      --xun:#d1a166;      /* 纁 */
+      --qing:#6aa7c8;     /* 雨过天青辅助 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC","Noto Sans SC","Microsoft YaHei", Arial;
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(106,167,200,.20), transparent 55%),
+        radial-gradient(1200px 800px at 85% 25%, rgba(183,146,75,.18), transparent 55%),
+        radial-gradient(1200px 800px at 60% 90%, rgba(34,58,80,.10), transparent 55%),
+        linear-gradient(180deg, #f9f4ea 0%, #f6f1e7 60%, #f3ede2 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* 纸纹 */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+      pointer-events:none;
+      mix-blend-mode:multiply;
+      z-index:0;
+    }
+
+    /* 顶部卷轴栏 */
+    header{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(251,247,239,.88), rgba(251,247,239,.55));
+      border-bottom:1px solid rgba(30,27,22,.10);
+    }
+    .topbar{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .seal{
+      width:42px; height:42px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 40%),
+        linear-gradient(135deg, #9b3b3b, #7b2323);
+      box-shadow: 0 12px 28px rgba(0,0,0,.15);
+      display:grid; place-items:center;
+      color:#fff; font-weight:800;
+      letter-spacing:2px;
+      font-size:14px;
+    }
+    .titlewrap{display:flex; flex-direction:column; line-height:1.1}
+    .title{
+      font-weight:900;
+      font-size:16px;
+      letter-spacing:.8px;
+    }
+    .subtitle{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .pill{
+      margin-left:auto;
+      display:flex; align-items:center; gap:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .progress{
+      width:170px; height:10px; border-radius:999px;
+      background:rgba(30,27,22,.10);
+      overflow:hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), rgba(106,167,200,.9));
+      border-radius:999px;
+      transition: width .4s ease;
+    }
+
+    main{
+      position:relative; z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:22px 18px 90px;
+    }
+
+    /* 卡片容器 */
+    .card{
+      background: linear-gradient(180deg, rgba(251,247,239,.92), rgba(251,247,239,.80));
+      border:1px solid rgba(30,27,22,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:-40px -40px auto auto;
+      width:160px; height:160px;
+      background: radial-gradient(circle at 40% 40%, rgba(183,146,75,.25), transparent 60%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .pill{display:none}
+    }
+
+    h1{
+      font-size:26px; margin:6px 0 6px;
+      letter-spacing: .8px;
+    }
+    h2{
+      font-size:18px; margin:0 0 10px;
+      letter-spacing:.6px;
+    }
+    p{ margin:8px 0; color:var(--muted); line-height:1.75 }
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(30,27,22,.18), transparent);
+      margin:14px 0;
+    }
+
+    /* 按钮 */
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    button{
+      border:0;
+      border-radius: 14px;
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      background:rgba(30,27,22,.06);
+      color:var(--ink);
+    }
+    button:hover{ box-shadow: 0 12px 20px rgba(0,0,0,.08)}
+    button:active{ transform: translateY(1px) }
+    .primary{
+      background: linear-gradient(135deg, rgba(183,146,75,1), rgba(106,167,200, .95));
+      color:#fff;
+    }
+    .ghost{
+      background:transparent;
+      border:1px solid rgba(30,27,22,.14);
+    }
+    .danger{
+      background:linear-gradient(135deg, #9b3b3b, #6a2020);
+      color:#fff;
+    }
+
+    /* 小标签 */
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(30,27,22,.06);
+      border:1px solid rgba(30,27,22,.10);
+      color:var(--muted);
+    }
+
+    /* 表单 */
+    .field{
+      display:flex; flex-direction:column; gap:8px;
+      margin-top:10px;
+    }
+    input, textarea, select{
+      width:100%;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(30,27,22,.14);
+      background: rgba(255,255,255,.55);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{ min-height:110px; resize:vertical; line-height:1.7 }
+
+    /* 关卡导航 */
+    .steps{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin:10px 0 0;
+    }
+    .step{
+      flex:1;
+      min-width:140px;
+      padding:10px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(30,27,22,.12);
+      background: rgba(255,255,255,.40);
+      color: var(--muted);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .step b{color:var(--ink)}
+    .step .s{
+      width:22px; height:22px;
+      border-radius:8px;
+      display:grid; place-items:center;
+      background:rgba(30,27,22,.08);
+      color:var(--ink);
+      font-size:12px;
+      font-weight:900;
+    }
+    .step.active{
+      background: linear-gradient(135deg, rgba(183,146,75,.20), rgba(106,167,200,.18));
+      border-color: rgba(183,146,75,.45);
+      color: var(--ink);
+    }
+    .step.done{
+      background: rgba(106,167,200,.18);
+      border-color: rgba(106,167,200,.42);
+    }
+    .step.done .s{ background: rgba(106,167,200,.35) }
+
+    /* 题目区 */
+    .qbox{ margin-top:14px }
+    .qhead{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .qtitle{
+      font-size:16px; font-weight:900; margin:0;
+      letter-spacing:.4px;
+    }
+    .qmeta{
+      display:flex; flex-direction:column; gap:6px; align-items:flex-end;
+      min-width:140px;
+    }
+    .qtype{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .qnum{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .options{ margin:12px 0; display:grid; gap:10px }
+    .opt{
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(30,27,22,.12);
+      background: rgba(255,255,255,.42);
+      cursor:pointer;
+      display:flex; gap:10px; align-items:flex-start;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .opt:hover{ transform: translateY(-1px); border-color: rgba(183,146,75,.45) }
+    .opt .mark{
+      width:22px; height:22px; border-radius:9px;
+      display:grid; place-items:center;
+      background: rgba(30,27,22,.08);
+      font-weight:900;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+    .opt.selected{
+      background: linear-gradient(135deg, rgba(183,146,75,.18), rgba(106,167,200,.16));
+      border-color: rgba(183,146,75,.55);
+    }
+    .opt.correct{
+      background: rgba(66, 160, 115, .16);
+      border-color: rgba(66, 160, 115, .55);
+    }
+    .opt.wrong{
+      background: rgba(155, 59, 59, .12);
+      border-color: rgba(155, 59, 59, .55);
+    }
+
+    /* 即时反馈条 */
+    .feedback{
+      margin-top:10px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(30,27,22,.10);
+      background: rgba(255,255,255,.45);
+      display:none;
+    }
+    .feedback.show{ display:block }
+    .fbline{ display:flex; gap:10px; align-items:flex-start }
+    .fbicon{
+      width:26px; height:26px; border-radius:10px;
+      display:grid; place-items:center;
+      font-weight:900;
+      flex:0 0 auto;
+    }
+    .fbicon.ok{ background: rgba(66,160,115,.18); color:#2c6a4b; border:1px solid rgba(66,160,115,.35) }
+    .fbicon.no{ background: rgba(155,59,59,.16); color:#7b2323; border:1px solid rgba(155,59,59,.35) }
+    .fbicon.warn{ background: rgba(183,146,75,.16); color:#7b5a22; border:1px solid rgba(183,146,75,.35) }
+    .fbtitle{ font-weight:900; margin:0 }
+    .fbtext{ margin:4px 0 0; color:var(--muted); line-height:1.7 }
+
+    /* 配对题 */
+    .pairwrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 700px){
+      .pairwrap{grid-template-columns:1fr}
+    }
+    .paircol{
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(30,27,22,.10);
+      background: rgba(255,255,255,.35);
+    }
+    .paircol h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.4px;
+    }
+    .pairitem{
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(30,27,22,.12);
+      background: rgba(255,255,255,.42);
+      cursor:pointer;
+      margin-bottom:8px;
+      user-select:none;
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .pairitem.selected{ border-color: rgba(183,146,75,.55); background: linear-gradient(135deg, rgba(183,146,75,.16), rgba(106,167,200,.12)) }
+    .pairitem.matched{ border-color: rgba(66,160,115,.55); background: rgba(66,160,115,.14) }
+    .pairitem .small{ font-size:12px; color:var(--muted) }
+
+    /* 色卡 */
+    .palette{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .swatch{
+      width:112px;
+      border-radius:18px;
+      border:1px solid rgba(30,27,22,.14);
+      overflow:hidden;
+      cursor:pointer;
+      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+      transition: transform .12s ease;
+      background: rgba(255,255,255,.45);
+    }
+    .swatch:hover{ transform: translateY(-2px) }
+    .swatch .c{
+      height:58px;
+      position:relative;
+    }
+    .swatch .t{
+      padding:10px 10px;
+      font-weight:900;
+      font-size:13px;
+      display:flex; justify-content:space-between;
+      align-items:center;
+    }
+    .swatch .t span{ color:var(--muted); font-weight:700; font-size:11px }
+    .c::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 55%),
+                  radial-gradient(circle at 75% 65%, rgba(0,0,0,.08), transparent 60%);
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
+
+    /* 卷轴弹窗 */
+    .modalback{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.35);
+      display:none;
+      z-index:60;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modalback.show{ display:flex }
+    .scroll{
+      width:min(860px, 100%);
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(251,247,239,.96), rgba(251,247,239,.88));
+      border:1px solid rgba(30,27,22,.14);
+      box-shadow: 0 28px 80px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+      animation: pop .28s ease-out;
+    }
+    @keyframes pop{
+      from{ transform: translateY(10px) scale(.98); opacity:.0 }
+      to{ transform: translateY(0) scale(1); opacity:1 }
+    }
+    .scroll::before, .scroll::after{
+      content:"";
+      position:absolute; top:0; bottom:0;
+      width:26px;
+      background: linear-gradient(180deg, rgba(183,146,75,.60), rgba(183,146,75,.35));
+      opacity:.65;
+    }
+    .scroll::before{ left:0 }
+    .scroll::after{ right:0 }
+    .scrollhead{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(30,27,22,.10);
+    }
+    .scrollhead b{ font-size:16px; letter-spacing:.6px }
+    .scrollbody{
+      padding:18px 22px 16px;
+      display:grid;
+      grid-template-columns: 1.0fr 1.0fr;
+      gap:14px;
+    }
+    @media (max-width: 780px){
+      .scrollbody{grid-template-columns:1fr}
+    }
+    .scrollsec{
+      background: rgba(255,255,255,.42);
+      border:1px solid rgba(30,27,22,.10);
+      border-radius: 18px;
+      padding:12px;
+    }
+    .scrollsec h4{ margin:0 0 8px; font-size:13px; letter-spacing:.4px }
+    .scrollsec p{ margin:0; font-size:13px }
+    .closex{
+      border:1px solid rgba(30,27,22,.14);
+      background: rgba(255,255,255,.55);
+      padding:8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    /* 泼墨动画层 */
+    .inkburst{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:58;
+      display:none;
+    }
+    .inkburst.show{display:block}
+    .splash{
+      position:absolute;
+      width:30px; height:30px;
+      border-radius: 999px;
+      opacity:.0;
+      filter: blur(.2px);
+      transform: translate(-50%, -50%) scale(.2);
+      animation: splash 700ms ease-out forwards;
+      mix-blend-mode:multiply;
+    }
+    @keyframes splash{
+      0%{ opacity:.0; transform: translate(-50%,-50%) scale(.2) }
+      15%{ opacity:.35 }
+      65%{ opacity:.22 }
+      100%{ opacity:0; transform: translate(-50%,-50%) scale(11) }
+    }
+
+    /* 排行榜 */
+    .rank{
+      margin-top:10px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(30,27,22,.10);
+      background: rgba(255,255,255,.35);
+    }
+    .rank .rhead{
+      padding:10px 12px;
+      display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(30,27,22,.10);
+      font-weight:900;
+    }
+    .rank table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    .rank td, .rank th{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(30,27,22,.08);
+      text-align:left;
+    }
+    .rank tr:last-child td{border-bottom:0}
+    .medal{ font-weight:900 }
+    .muted{ color:var(--muted) }
+
+    /* 底部提示 */
+    .footnote{
+      margin-top:12px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="seal">印</div>
+    <div class="titlewrap">
+      <div class="title">《中国色的诗意》微课｜课后闯关答题</div>
+      <div class="subtitle">九年级｜色之名 · 色之魂 · 色之韵 · 综合表达</div>
+    </div>
+    <div class="pill">
+      <span id="userMini">未登录</span>
+      <div class="progress" title="闯关进度">
+        <div class="bar" id="bar"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="inkburst" id="inkburst"></div>
+
+<div class="modalback" id="modalBack" aria-hidden="true">
+  <div class="scroll" role="dialog" aria-modal="true">
+    <div class="scrollhead">
+      <b id="scrollTitle">卷轴</b>
+      <button class="closex" id="closeModal">收起</button>
+    </div>
+    <div class="scrollbody">
+      <div class="scrollsec">
+        <h4>色感解释</h4>
+        <p id="mFeel">—</p>
+      </div>
+      <div class="scrollsec">
+        <h4>来源说明</h4>
+        <p id="mFrom">—</p>
+      </div>
+      <div class="scrollsec">
+        <h4>意象关键词</h4>
+        <p id="mKeys">—</p>
+      </div>
+      <div class="scrollsec">
+        <h4>写作句式示范 + “挑战一句”</h4>
+        <p id="mSentence">—</p>
+      </div>
+    </div>
+    <div style="padding:0 22px 18px; color:var(--muted); font-size:12px; line-height:1.7">
+      小贴士：把色卡当作“诗意词库”，写作时可随时打开卷轴取句式与意象。
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="grid">
+    <!-- 左侧主区 -->
+    <section class="card" id="stage"></section>
+
+    <!-- 右侧侧栏 -->
+    <aside class="card">
+      <h2>闯关地图</h2>
+      <div class="steps" id="stepNav"></div>
+
+      <div class="divider"></div>
+
+      <h2>国风色卡（随写随用）</h2>
+      <p style="margin-top:4px">点色卡，泼墨晕染 → 卷轴弹窗。可用于写作表达。</p>
+      <div class="palette" id="paletteSide"></div>
+
+      <div class="divider"></div>
+
+      <h2>排行榜</h2>
+      <p style="margin-top:4px">成绩保存在本机（离线可用），按“综合分”排序。</p>
+      <div class="rank" id="rankBox"></div>
+      <div class="btnrow">
+        <button class="ghost" id="btnRefreshRank">刷新榜单</button>
+        <button class="danger" id="btnClearRank">清空榜单</button>
+      </div>
+
+      <div class="footnote">
+            </aside>
+  </div>
+</main>
+
+<script>
+/* ===========================
+   1) 色卡卷轴内容
+=========================== */
+const COLOR_SCROLL = {
+  "月白": {
+    hex: getComputedStyle(document.documentElement).getPropertyValue('--yuebai').trim(),
+    feel: "清冷而柔和，像月光在水面上轻轻铺开，带一点浅蓝与泛绿的气息。",
+    from: "源于月色的微光与薄雾的反射，不是纯白，而是“白中带青”。",
+    keys: "清辉 / 薄雾 / 静夜 / 空明 / 轻寒",
+    sentence: "句式示范：<b>“月白的光像____，把____照得____。”</b><br>挑战一句：用“月白”写一句描写夜景或心情的话。"
+  },
+  "黛青": {
+    hex: getComputedStyle(document.documentElement).getPropertyValue('--daiqing').trim(),
+    feel: "深沉厚重，像远山叠影，又像土地的底色，安静却有力量。",
+    from: "源于远山的青黑与画眉用的“黛”色矿物，带有古典的沉稳气质。",
+    keys: "远山 / 土地 / 沉静 / 坚韧 / 深情",
+    sentence: "句式示范：<b>“黛青的____，让____显得____。”</b><br>挑战一句：用“黛青”写一句描写山、土地或坚守的句子。"
+  },
+  "胭脂": {
+    hex: getComputedStyle(document.documentElement).getPropertyValue('--yanzhi').trim(),
+    feel: "鲜活明丽，像晨曦与花瓣的热度，有人间烟火，也有盛唐气象。",
+    from: "源于妆奁中的胭脂色与生活美感，后来也成为诗词里“黎明”“花色”的文化符号。",
+    keys: "晨光 / 花瓣 / 热烈 / 生机 / 烟火气",
+    sentence: "句式示范：<b>“胭脂色的____，在____里____。”</b><br>挑战一句：用“胭脂”写一句描写黎明、花或热情的句子。"
+  },
+  "玄纁": {
+    hex: getComputedStyle(document.documentElement).getPropertyValue('--xuanxun').trim(),
+    feel: "庄重肃穆：玄如深夜苍穹，纁如黄昏落日，天地之色，含敬畏与仪式感。",
+    from: "古代隆重礼服之色：上衣“玄”（象天），下裳“纁”（象地），寓意对天地的敬意与秩序。",
+    keys: "天地 / 礼仪 / 敬意 / 家国 / 庄严",
+    sentence: "句式示范：<b>“玄纁的____，像____，让人想到____。”</b><br>挑战一句：用“玄纁”写一句与“家国、敬意、仪式”相关的句子。"
+  }
+};
+
+/* ===========================
+   2) 关卡结构
+=========================== */
+const LEVELS = [
+  { id:"intro", name:"导入", short:"雨过天青", type:"intro" },
+  { id:"name", name:"色之名", short:"名中有画", type:"quiz" },
+  { id:"soul", name:"色之魂", short:"色中有情", type:"quiz" },
+  { id:"rhyme", name:"色之韵", short:"文化之韵", type:"quiz" },
+  { id:"all", name:"综合·表达", short:"写出诗意", type:"quiz" },
+  { id:"result", name:"结算", short:"学习建议", type:"result" }
+];
+
+/* ===========================
+   3) 题库：客观题计正确率；表达题不判对错
+=========================== */
+const QUESTIONS = {
+  name: [
+    {
+      id:"n1",
+      type:"single",
+      stem:"【单选】“月白”更接近下面哪一种理解？",
+      options:[
+        "纯白无色，像粉笔一样白",
+        "月光的浅蓝泛绿，清冷柔和",
+        "浓烈大红，像晚霞",
+        "深黑如墨，沉重压抑"
+      ],
+      answer:[1],
+      explain:"“月白”不是纯白，而是带浅蓝与泛绿的月光色，名中有画。"
+    },
+    {
+      id:"n2",
+      type:"multi",
+      stem:"【多选】以下哪些特点符合“中国传统色名”的命名智慧？（本题：点击下一题时判定）",
+      options:[
+        "从自然观察中取象",
+        "仅用科学波长来命名",
+        "常带情感与意境",
+        "与生活经验密切相关"
+      ],
+      answer:[0,2,3],
+      explain:"传统色名往往“源于自然/生活”，并承载情感意境，而非纯科学参数。"
+    },
+    {
+      id:"n3",
+      type:"pair",
+      stem:"【配对】把传统色名与更贴近的意象/来源配对（点左再点右）：",
+      left:[
+        {k:"月白", v:"月光微冷的浅蓝泛绿"},
+        {k:"黛青", v:"远山/画眉黛色的深沉青黑"},
+        {k:"胭脂", v:"妆奁/花瓣般的鲜活绯红"}
+      ],
+      right:[
+        {k:"A", v:"妆容·鲜活绯红"},
+        {k:"B", v:"月色·浅蓝泛绿"},
+        {k:"C", v:"远山·深沉青黑"}
+      ],
+      answerMap:{
+        "月白":"B",
+        "黛青":"C",
+        "胭脂":"A"
+      },
+      explain:"命名常取自然与生活：月白取月色，黛青取远山与黛，胭脂取妆奁与花色。"
+    }
+  ],
+  soul: [
+    {
+      id:"s1",
+      type:"single",
+      stem:"【单选】《暮江吟》中“半江瑟瑟半江红”最突出的色彩表达效果是：",
+      options:[
+        "单一色调，营造压抑",
+        "冷暖对比，捕捉光影变化与微妙情感",
+        "全靠夸张比喻，不含画面",
+        "色彩杂乱，无法想象"
+      ],
+      answer:[1],
+      explain:"冷暖对比形成画面张力，表现傍晚江面光影与情绪变化。"
+    },
+    {
+      id:"s2",
+      type:"multi",
+      stem:"【多选】《千里江山图》中“石青、石绿渲染”能营造怎样的意境？（本题：点击下一题时判定）",
+      options:[
+        "层次分明，让山河更壮阔",
+        "使画面更平面、更单调",
+        "让色彩“呼吸”，具有生命感",
+        "与“家国情怀”的表达可发生关联"
+      ],
+      answer:[0,2,3],
+      explain:"渲染让色彩有层次、有灵魂，形成壮阔气象，并能承载情感与价值指向。"
+    }
+  ],
+  rhyme: [
+    {
+      id:"r1",
+      type:"single",
+      stem:"【单选】“玄纁”在传统文化中更侧重象征：",
+      options:[
+        "随意搭配的流行配色",
+        "天地之色与礼仪敬意",
+        "儿童绘画的彩虹色",
+        "纯装饰，无意义"
+      ],
+      answer:[1],
+      explain:"玄为天、纁为地，服饰色彩象征敬天法地，含仪式与家国秩序。"
+    },
+    {
+      id:"r2",
+      type:"pair",
+      stem:"【配对】把“色→文化含义/现代应用”配对：",
+      left:[
+        {k:"玄纁", v:"象征天地敬意、礼仪庄重"},
+        {k:"胭脂", v:"从妆容到国潮设计的生活审美"}
+      ],
+      right:[
+        {k:"A", v:"礼仪·天地·家国秩序"},
+        {k:"B", v:"生活·妆容·现代国潮"}
+      ],
+      answerMap:{
+        "玄纁":"A",
+        "胭脂":"B"
+      },
+      explain:"玄纁偏礼仪哲思；胭脂更体现生活美感与古今传承。"
+    }
+  ],
+  all: [
+    {
+      id:"a1",
+      type:"single",
+      stem:"【单选】如果用传统色名来替代“浅蓝白的雪景”，更贴近的是：",
+      options:[
+        "胭脂",
+        "黛青",
+        "月白",
+        "玄纁"
+      ],
+      answer:[2],
+      explain:"雪景的清冷空明更接近“月白”的气质（白中带青，清辉之意）。"
+    },
+    {
+      id:"a2",
+      type:"multi",
+      stem:"【多选】完成“审美表达”时，哪些做法更能写出“诗意”？（本题：点击下一题时判定）",
+      options:[
+        "只写“好看、很美”",
+        "用“源于XX/营造XX意境”等句式",
+        "结合意象（如远山、月光、黎明）",
+        "把色彩与情感/文化联系起来"
+      ],
+      answer:[1,2,3],
+      explain:"九年级表达应更“具体+有范式”：句式、意象、情感与文化联结，让语言更有力量。"
+    },
+    {
+      id:"a3",
+      type:"express",
+      stem:"【表达题】请用至少1个传统色名（如月白/黛青/胭脂/玄纁）写一段描写（60—120字），描写“窗外景色”或“此刻心情”。",
+      tips:[
+        "建议结构：色名 → 来源/意象 → 画面细节 → 情感或意义",
+        "可用句式：①“____的光像____，把____照得____。”",
+        "可用句式：②“____的____，让____显得____。”",
+        "可加入：家国/敬意/传承/生活气息等文化联想"
+      ]
+    }
+  ]
+};
+
+/* ===========================
+   4) 状态：新增计时与正确率
+=========================== */
+const state = {
+  user: { name:"", cls:"" },
+  levelIndex: 0,
+  qIndex: 0,
+
+  startTime: 0,
+  usedSeconds: 0,
+
+  correctCount: 0,
+  wrongCount: 0,
+  judged: {},
+
+  totalObjective: countObjective(),
+  doneObjective: 0,
+  doneExpress: 0,
+
+  answers: {},
+  pairTemp: { left:null, right:null },
+  pairMap: {},
+
+  score: 0
+};
+
+function countObjective(){
+  let total = 0;
+  for(const k of ["name","soul","rhyme","all"]){
+    for(const q of QUESTIONS[k]){
+      if(q.type !== "express") total++;
+    }
+  }
+  return total;
+}
+
+/* ===========================
+   5) 初始化
+=========================== */
+const $ = (id)=>document.getElementById(id);
+
+renderStepNav();
+renderPalette($("paletteSide"));
+bindRankButtons();
+render();
+
+/* ===========================
+   6) UI：闯关导航
+=========================== */
+function renderStepNav(){
+  const nav = $("stepNav");
+  nav.innerHTML = "";
+  LEVELS.forEach((lv, idx)=>{
+    const div = document.createElement("div");
+    div.className = "step" + (idx===state.levelIndex ? " active" : "") + (idx<state.levelIndex ? " done" : "");
+    div.innerHTML = `<div><b>${lv.name}</b><div class="muted" style="font-size:12px;margin-top:2px">${lv.short}</div></div><div class="s">${idx+1}</div>`;
+    div.style.cursor = idx<=state.levelIndex ? "pointer":"not-allowed";
+    div.onclick = ()=>{
+      if(idx<=state.levelIndex){
+        state.levelIndex = idx;
+        state.qIndex = 0;
+        render();
+      }
+    };
+    nav.appendChild(div);
+  });
+}
+
+function updateTopProgress(){
+  const completed = getCompletion();
+  $("bar").style.width = completed + "%";
+  $("userMini").textContent = state.user.name ? `${state.user.name}｜${state.user.cls}` : "未登录";
+}
+
+function getCompletion(){
+  const total = state.totalObjective + 1; // +表达题
+  const done = state.doneObjective + state.doneExpress;
+  return Math.round(done / total * 100);
+}
+
+/* ===========================
+   7) 色卡与卷轴
+=========================== */
+function renderPalette(container){
+  container.innerHTML = "";
+  const list = ["月白","黛青","胭脂","玄纁"];
+  list.forEach(name=>{
+    const sw = document.createElement("div");
+    sw.className = "swatch";
+    const c = document.createElement("div");
+    c.className = "c";
+    c.style.background = (name==="玄纁")
+      ? `linear-gradient(90deg, var(--xuanxun), var(--xun))`
+      : COLOR_SCROLL[name].hex;
+    const t = document.createElement("div");
+    t.className = "t";
+    t.innerHTML = `${name} <span>卷轴</span>`;
+    sw.appendChild(c); sw.appendChild(t);
+    sw.onclick = (e)=>{
+      inkSplash(e.clientX, e.clientY, name);
+      openScroll(name);
+    };
+    container.appendChild(sw);
+  });
+}
+
+function openScroll(colorName){
+  const data = COLOR_SCROLL[colorName];
+  $("scrollTitle").textContent = `【${colorName}】卷轴`;
+  $("mFeel").innerHTML = data.feel;
+  $("mFrom").innerHTML = data.from;
+  $("mKeys").innerHTML = data.keys;
+  $("mSentence").innerHTML = data.sentence;
+  $("modalBack").classList.add("show");
+  $("modalBack").setAttribute("aria-hidden","false");
+}
+$("closeModal").onclick = closeModal;
+$("modalBack").onclick = (e)=>{
+  if(e.target.id==="modalBack") closeModal();
+};
+function closeModal(){
+  $("modalBack").classList.remove("show");
+  $("modalBack").setAttribute("aria-hidden","true");
+}
+
+function inkSplash(x,y, colorName){
+  const layer = $("inkburst");
+  layer.innerHTML = "";
+  layer.classList.add("show");
+  const base = (colorName==="玄纁") ? "#2b1f1a" : COLOR_SCROLL[colorName].hex;
+  for(let i=0;i<9;i++){
+    const s = document.createElement("div");
+    s.className = "splash";
+    s.style.left = x + (Math.random()*80-40) + "px";
+    s.style.top = y + (Math.random()*80-40) + "px";
+    s.style.background = base;
+    s.style.animationDelay = (Math.random()*80) + "ms";
+    s.style.animationDuration = (520 + Math.random()*300) + "ms";
+    layer.appendChild(s);
+  }
+  setTimeout(()=>layer.classList.remove("show"), 900);
+}
+
+/* ===========================
+   8) 排行榜（localStorage）
+=========================== */
+const RANK_KEY = "china_color_rank_v2";
+function loadRank(){
+  try{ return JSON.parse(localStorage.getItem(RANK_KEY) || "[]"); }
+  catch(e){ return []; }
+}
+function saveRank(list){
+  localStorage.setItem(RANK_KEY, JSON.stringify(list));
+}
+function addRankEntry(entry){
+  const list = loadRank();
+  list.push(entry);
+  list.sort((a,b)=> b.score - a.score || a.seconds - b.seconds || b.accuracy - a.accuracy);
+  saveRank(list.slice(0,20));
+}
+function renderRank(){
+  const list = loadRank();
+  const box = $("rankBox");
+  if(!list.length){
+    box.innerHTML = `<div class="rhead">暂无记录 <span class="muted">快去闯关</span></div>
+      <div style="padding:12px;color:var(--muted);font-size:13px;line-height:1.7">完成闯关后会自动写入排行榜（本机保存）。</div>`;
+    return;
+  }
+  const rows = list.map((r,idx)=>{
+    const medal = idx===0?"🥇":idx===1?"🥈":idx===2?"🥉":`${idx+1}`;
+    const dt = new Date(r.time);
+    const dateStr = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
+    return `<tr>
+      <td class="medal">${medal}</td>
+      <td><b>${escapeHtml(r.name)}</b><div class="muted" style="font-size:12px;margin-top:2px">${escapeHtml(r.cls)}</div></td>
+      <td><b>${r.score}</b>/100</td>
+      <td class="muted">${r.accuracy}%</td>
+      <td class="muted">${fmtTime(r.seconds)}</td>
+      <td class="muted">${r.complete}%</td>
+      <td class="muted">${dateStr}</td>
+    </tr>`;
+  }).join("");
+  box.innerHTML = `
+    <div class="rhead">Top 20 <span class="muted">综合分榜</span></div>
+    <table>
+      <thead>
+        <tr><th>名次</th><th>同学</th><th>综合分</th><th>正确率</th><th>用时</th><th>完成度</th><th>日期</th></tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+function bindRankButtons(){
+  $("btnRefreshRank").onclick = renderRank;
+  $("btnClearRank").onclick = ()=>{
+    if(confirm("确定清空排行榜？（仅清空本机记录）")){
+      localStorage.removeItem(RANK_KEY);
+      renderRank();
+    }
+  };
+}
+renderRank();
+
+/* ===========================
+   9) 渲染主区
+=========================== */
+function render(){
+  updateTopProgress();
+  renderStepNav();
+
+  const lv = LEVELS[state.levelIndex];
+  const stage = $("stage");
+  stage.innerHTML = "";
+
+  if(lv.type==="intro") stage.appendChild(renderIntro());
+  else if(lv.id==="result") stage.appendChild(renderResult());
+  else stage.appendChild(renderQuizLevel(lv.id));
+}
+
+function renderIntro(){
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="tag">情境导入 · 雨过天青</div>
+    <h1>雨过天青，邂逅中国色的诗意</h1>
+    <p>
+      当你说“淡蓝”“浅灰”，古人却说：<b>雨过天青</b>。<br>
+      中国色，不只是颜色，更是<b>名字里的画</b>、<b>色彩里的情</b>、<b>文化里的魂</b>。
+    </p>
+    <div class="divider"></div>
+    <h2>填写闯关信息</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+      <div class="field">
+        <label class="muted">姓名</label>
+        <input id="inpName" placeholder="请输入姓名（用于排行榜）" maxlength="12"/>
+      </div>
+      <div class="field">
+        <label class="muted">班级</label>
+        <input id="inpClass" placeholder="如：九（3）班" maxlength="12"/>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h2>四张国风色卡（点开卷轴）</h2>
+    <p style="margin-top:6px">写作时可随时打开色卡获取意象与句式。</p>
+    <div class="palette" id="paletteIntro"></div>
+
+    <div class="btnrow">
+      <button class="primary" id="btnStart">开始闯关</button>
+      <button class="ghost" id="btnSkipUser">我先不填（仍可闯关）</button>
+    </div>
+
+    <div class="footnote">
+      <b>闯关提示：</b>多选题将在点击“下一题/下一关”时判定并给解析；不要求全对才能前进。<br>
+      <b>计分方式：</b>正确率 + 用时 综合评分（0—100），排行榜按综合分排序。
+    </div>
+  `;
+  setTimeout(()=>{
+    renderPalette($("paletteIntro"));
+
+    const saved = JSON.parse(localStorage.getItem("china_color_user_v1")||"{}");
+    if(saved.name) $("inpName").value = saved.name;
+    if(saved.cls) $("inpClass").value = saved.cls;
+
+    $("btnStart").onclick = ()=>{
+      const name = $("inpName").value.trim();
+      const cls = $("inpClass").value.trim();
+      state.user.name = name || "匿名同学";
+      state.user.cls = cls || "九年级";
+      localStorage.setItem("china_color_user_v1", JSON.stringify({name:state.user.name, cls:state.user.cls}));
+      state.startTime = Date.now(); // ✅ 开始计时
+      nextLevel();
+    };
+    $("btnSkipUser").onclick = ()=>{
+      state.user.name = "匿名同学";
+      state.user.cls = "九年级";
+      state.startTime = Date.now(); // ✅ 开始计时
+      nextLevel();
+    };
+  },0);
+
+  return wrap;
+}
+
+function renderQuizLevel(levelId){
+  const wrap = document.createElement("div");
+
+  const titleMap = {
+    name: {tag:"色之名", h:"名中有画：源于万物", p:"认识色名的诗性命名与来源，把现代“浅蓝/深红”变成更有画面感的中国色。"},
+    soul: {tag:"色之魂", h:"色中有情：诗画意境会呼吸", p:"理解色彩如何营造意境与情感：渲染、冷暖对比，让色彩成为诗画的呼吸。"},
+    rhyme:{tag:"色之韵", h:"色里有文化：古今传承的韵", p:"从“玄纁”的天地敬意到“胭脂”的生活美学，读懂色彩背后的文化基因。"},
+    all:  {tag:"综合·表达", h:"把中国色写进你的文字", p:"将色名、意象、句式组合，写出有“诗意”的描写。"}
+  };
+  const info = titleMap[levelId];
+
+  wrap.innerHTML = `
+    <div class="tag">${info.tag}</div>
+    <h1>${info.h}</h1>
+    <p>${info.p}</p>
+    <div class="divider"></div>
+    <div id="qArea"></div>
+    <div class="btnrow" id="qActions"></div>
+  `;
+
+  setTimeout(()=>renderQuestion(levelId),0);
+  return wrap;
+}
+
+function renderQuestion(levelId){
+  const qArea = $("qArea");
+  const qActions = $("qActions");
+  qArea.innerHTML = "";
+  qActions.innerHTML = "";
+
+  const qs = QUESTIONS[levelId];
+  const q = qs[state.qIndex];
+
+  const head = document.createElement("div");
+  head.className = "qhead";
+  head.innerHTML = `
+    <div>
+      <div class="qnum">第 ${state.qIndex+1} / ${qs.length} 题</div>
+      <p class="qtitle">${q.stem}</p>
+    </div>
+    <div class="qmeta">
+      <div class="qtype">题型：${typeName(q.type)}</div>
+      <div class="tag">${q.type==="multi" ? "下一步判定" : "即时反馈"}</div>
+    </div>
+  `;
+  qArea.appendChild(head);
+
+  if(q.type==="single" || q.type==="multi"){
+    const opts = document.createElement("div");
+    opts.className = "options";
+    const saved = state.answers[q.id] || [];
+    q.options.forEach((text, idx)=>{
+      const op = document.createElement("div");
+      op.className = "opt";
+      if(saved.includes(idx)) op.classList.add("selected");
+      op.innerHTML = `<div class="mark">${String.fromCharCode(65+idx)}</div><div>${escapeHtml(text)}</div>`;
+
+      op.onclick = ()=>{
+        if(q.type==="single"){
+          state.answers[q.id] = [idx];
+          [...opts.children].forEach(c=>c.classList.remove("selected"));
+          op.classList.add("selected");
+          judgeObjectiveNow(q); // 单选仍即时判（你可以改成下一步判）
+        }else{
+          // ✅ 多选：只选，不判
+          const cur = new Set(state.answers[q.id] || []);
+          if(cur.has(idx)) cur.delete(idx);
+          else cur.add(idx);
+          state.answers[q.id] = [...cur].sort((a,b)=>a-b);
+          op.classList.toggle("selected");
+          setFeedback("warn","已选择","多选题将在点击“下一题/下一关”时判定并给出解析。");
+        }
+      };
+      opts.appendChild(op);
+    });
+    qArea.appendChild(opts);
+
+    const fb = makeFeedbackBox();
+    qArea.appendChild(fb);
+
+    qActions.appendChild(makeNavButtons(levelId, q));
+
+    if(q.type==="single" && saved.length){
+      judgeObjectiveNow(q, true);
+    }
+  }
+
+  else if(q.type==="pair"){
+    state.pairTemp = {left:null, right:null};
+    state.pairMap[q.id] = state.pairMap[q.id] || {};
+
+    const pair = document.createElement("div");
+    pair.className = "pairwrap";
+
+    const left = document.createElement("div");
+    left.className = "paircol";
+    left.innerHTML = `<h3>左侧：色名</h3>`;
+    const right = document.createElement("div");
+    right.className = "paircol";
+    right.innerHTML = `<h3>右侧：选项</h3>`;
+
+    q.left.forEach(item=>{
+      const div = document.createElement("div");
+      div.className = "pairitem";
+      div.dataset.side="L";
+      div.dataset.key=item.k;
+      div.innerHTML = `<b>${item.k}</b><span class="small">${escapeHtml(item.v)}</span>`;
+      div.onclick = ()=>pickPair(q, div);
+      left.appendChild(div);
+    });
+
+    q.right.forEach(item=>{
+      const div = document.createElement("div");
+      div.className = "pairitem";
+      div.dataset.side="R";
+      div.dataset.key=item.k;
+      div.innerHTML = `<b>${item.k}</b><span class="small">${escapeHtml(item.v)}</span>`;
+      div.onclick = ()=>pickPair(q, div);
+      right.appendChild(div);
+    });
+
+    pair.appendChild(left); pair.appendChild(right);
+    qArea.appendChild(pair);
+
+    const fb = makeFeedbackBox();
+    qArea.appendChild(fb);
+
+    qActions.appendChild(makeNavButtons(levelId, q));
+
+    setTimeout(()=>refreshPairUI(q),0);
+  }
+
+  else if(q.type==="express"){
+    const box = document.createElement("div");
+    box.className = "qbox";
+
+    const tips = q.tips.map(t=>`<li>${t}</li>`).join("");
+    box.innerHTML = `
+      <div class="tag">表达题 · 不判对错</div>
+      <p class="muted" style="margin-top:8px">温馨提醒：表达题只给写作方向。完成后即可进入结算页。</p>
+      <div class="divider"></div>
+      <h2>要点提示</h2>
+      <ul style="margin:8px 0 0; color:var(--muted); line-height:1.8; padding-left:20px">${tips}</ul>
+
+      <div class="divider"></div>
+      <h2>写作区（60—120字）</h2>
+      <textarea id="txtExpress" placeholder="示例：月白的光像薄雾，轻轻落在窗沿……"></textarea>
+      <div id="expHint" class="feedback show" style="display:block">
+        <div class="fbline">
+          <div class="fbicon warn">✍</div>
+          <div>
+            <p class="fbtitle">写作提示</p>
+            <p class="fbtext" id="expText">未填写。建议写满 60—120 字，并至少用一个传统色名。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h2>色卡词库（点开卷轴取句式）</h2>
+      <div class="palette" id="paletteExpress"></div>
+    `;
+    qArea.appendChild(box);
+
+    const fb = makeFeedbackBox();
+    qArea.appendChild(fb);
+
+    qActions.appendChild(makeNavButtons(levelId, q, true));
+
+    setTimeout(()=>{
+      renderPalette($("paletteExpress"));
+      const ta = $("txtExpress");
+      ta.value = (state.answers[q.id]||"");
+      ta.addEventListener("input", ()=>{
+        state.answers[q.id] = ta.value;
+        liveExpressHint(ta.value);
+      });
+      liveExpressHint(ta.value);
+    },0);
+  }
+}
+
+/* ===========================
+   10) 反馈条
+=========================== */
+function makeFeedbackBox(){
+  const fb = document.createElement("div");
+  fb.className = "feedback";
+  fb.id = "fb";
+  fb.innerHTML = `
+    <div class="fbline">
+      <div class="fbicon warn" id="fbIcon">⚠</div>
+      <div>
+        <p class="fbtitle" id="fbTitle">等待作答</p>
+        <p class="fbtext" id="fbText">请选择/完成后会出现反馈与解析。</p>
+      </div>
+    </div>
+  `;
+  return fb;
+}
+function setFeedback(type, title, text){
+  const fb = $("fb");
+  if(!fb) return;
+  fb.classList.add("show");
+  const icon = $("fbIcon");
+  icon.className = "fbicon " + (type==="ok"?"ok": type==="no"?"no":"warn");
+  icon.textContent = type==="ok"?"✅": type==="no"?"❌":"⚠";
+  $("fbTitle").textContent = title;
+  $("fbText").innerHTML = text;
+}
+
+/* ===========================
+   11) 单选即时判定（你也可改成下一步判）
+=========================== */
+function judgeObjectiveNow(q, silent=false){
+  const selected = state.answers[q.id] || [];
+  if(!selected.length){
+    setFeedback("warn","未作答","请先选择一个选项。");
+    return;
+  }
+  const correct = selected[0]===q.answer[0];
+  markSingleUI(correct, q.answer[0], selected[0]);
+  if(correct) setFeedback("ok","正确","<b>解析：</b>"+q.explain);
+  else setFeedback("no","错误","<b>解析：</b>"+q.explain);
+
+  // ✅ 计入正确率：只算一次
+  if(!state.judged[q.id]){
+    state.judged[q.id]=true;
+    state.doneObjective += 1;
+    if(correct) state.correctCount += 1;
+    else state.wrongCount += 1;
+    updateTopProgress();
+  }
+}
+
+function markSingleUI(correct, rightIdx, selIdx){
+  const opts = document.querySelectorAll(".options .opt");
+  opts.forEach((op, idx)=>{
+    op.classList.remove("correct","wrong");
+    if(selIdx===idx && !correct) op.classList.add("wrong");
+    if(rightIdx===idx) op.classList.add("correct");
+  });
+}
+
+/* ===========================
+   12) 配对题逻辑：完成后即时判（允许错也能走，但会记录）
+=========================== */
+function pickPair(q, div){
+  const side = div.dataset.side;
+  const key = div.dataset.key;
+
+  const curMap = state.pairMap[q.id] || {};
+  if(side==="L" && curMap[key]) return;
+  if(side==="R" && Object.values(curMap).includes(key)) return;
+
+  if(side==="L") state.pairTemp.left = key;
+  else state.pairTemp.right = key;
+
+  refreshPairUI(q);
+
+  if(state.pairTemp.left && state.pairTemp.right){
+    curMap[state.pairTemp.left] = state.pairTemp.right;
+    state.pairMap[q.id] = curMap;
+    state.pairTemp = {left:null, right:null};
+    refreshPairUI(q);
+
+    // 判定
+    judgePair(q);
+  }
+}
+
+function refreshPairUI(q){
+  const curMap = state.pairMap[q.id] || {};
+  document.querySelectorAll(".pairitem").forEach(el=>{
+    el.classList.remove("selected","matched");
+    const side = el.dataset.side;
+    const key = el.dataset.key;
+    if(side==="L"){
+      if(state.pairTemp.left===key) el.classList.add("selected");
+      if(curMap[key]) el.classList.add("matched");
+    }else{
+      if(state.pairTemp.right===key) el.classList.add("selected");
+      if(Object.values(curMap).includes(key)) el.classList.add("matched");
+    }
+  });
+}
+
+function judgePair(q){
+  const curMap = state.pairMap[q.id] || {};
+  const need = Object.keys(q.answerMap).length;
+  const done = Object.keys(curMap).length;
+
+  if(done < need){
+    setFeedback("warn","未完成配对",`你已配对 <b>${done}/${need}</b>，请继续完成。<br><b>解析：</b>${q.explain}`);
+    return;
+  }
+  let ok = true;
+  for(const left of Object.keys(q.answerMap)){
+    if(curMap[left] !== q.answerMap[left]) ok = false;
+  }
+
+  if(ok) setFeedback("ok","配对全对！","<b>解析：</b>"+q.explain);
+  else setFeedback("no","有配对错误","你可以带着解析继续前进，也可以返回重做。<br><b>解析：</b>"+q.explain);
+
+  // ✅ 计入正确率：只算一次
+  if(!state.judged[q.id]){
+    state.judged[q.id]=true;
+    state.doneObjective += 1;
+    if(ok) state.correctCount += 1;
+    else state.wrongCount += 1;
+    updateTopProgress();
+  }
+}
+
+/* ===========================
+   13) 表达题：实时提示，不判对错
+=========================== */
+function liveExpressHint(text){
+  const s = text.trim();
+  const len = s.length;
+  const hasColor = ["月白","黛青","胭脂","玄纁","雨过天青"].some(w=>s.includes(w));
+  const hint = $("expText");
+  if(!hint) return;
+
+  if(!len){
+    hint.innerHTML = "未填写。建议写满 <b>60—120</b> 字，并至少用一个传统色名。";
+    setFeedback("warn","未完成","表达题未填写：请完成后再进入结算。");
+    return;
+  }
+  let msg = `已填写 <b>${len}</b> 字。`;
+  if(len < 60) msg += ` 建议再补充画面细节（如光影、气味、声音），写到 <b>60</b> 字以上。`;
+  else if(len > 120) msg += ` 略长，可精炼：保留“色名+意象+情感”的关键句。`;
+  else msg += ` 字数合适。`;
+  msg += hasColor ? ` <b>√ 已使用传统色名</b>` : ` <b>× 建议加入至少1个传统色名</b>`;
+  msg += `<br>写作方向：先写“色名的感觉”，再写“它照见了什么”，最后点出“情感/文化联想”。`;
+  hint.innerHTML = msg;
+
+  setFeedback("warn","表达题提示","表达题不判对错，但需填写后才能结算。");
+}
+
+/* ===========================
+   14) 下一题按钮逻辑：多选题“下一步判定” + 允许错也能走
+=========================== */
+function makeNavButtons(levelId, q){
+  const frag = document.createDocumentFragment();
+
+  const btnPrev = document.createElement("button");
+  btnPrev.className = "ghost";
+  btnPrev.textContent = "上一题";
+  btnPrev.onclick = ()=>{
+    if(state.qIndex>0){
+      state.qIndex--;
+      renderQuestion(levelId);
+    }else{
+      prevLevel();
+    }
+  };
+
+  const btnNext = document.createElement("button");
+  btnNext.className = "primary";
+  btnNext.textContent = (state.qIndex === QUESTIONS[levelId].length-1) ? "进入下一关" : "下一题";
+
+  btnNext.onclick = ()=>{
+    // 表达题：必须填写才可结算
+    if(q.type==="express"){
+      const text = (state.answers[q.id]||"").trim();
+      if(!text.length){
+        setFeedback("warn","未完成","表达题未填写：请先写一段再进入结算。");
+        return;
+      }
+      if(state.doneExpress===0){
+        state.doneExpress = 1;
+        updateTopProgress();
+      }
+      if(state.qIndex === QUESTIONS[levelId].length-1) nextLevel();
+      else { state.qIndex++; renderQuestion(levelId); }
+      return;
+    }
+
+    // 单选：若未判过，先判（即时判也算一次）
+    if(q.type==="single" && !state.judged[q.id]){
+      const sel = state.answers[q.id] || [];
+      if(!sel.length){
+        setFeedback("warn","未作答","请先选择一个选项再进入下一题。");
+        return;
+      }
+      judgeObjectiveNow(q);
+      // 单选允许带错前进：不return
+    }
+
+    // ✅ 多选：点击下一步时判定，不拦路
+    if(q.type==="multi"){
+      const sel = state.answers[q.id] || [];
+      if(!sel.length){
+        setFeedback("warn","未作答","请至少勾选一个选项再进入下一题。");
+        return;
+      }
+
+      const ans = new Set(q.answer);
+      const set = new Set(sel);
+      let ok = true;
+      for(const a of ans) if(!set.has(a)) ok=false;
+      for(const s of set) if(!ans.has(s)) ok=false;
+
+      // UI标注对错（可选：显示正确项、错误项）
+      markMultiUI(q.answer, sel);
+
+      // 计入正确率：只算一次
+      if(!state.judged[q.id]){
+        state.judged[q.id] = true;
+        state.doneObjective += 1;
+        if(ok) state.correctCount += 1;
+        else state.wrongCount += 1;
+        updateTopProgress();
+      }
+
+      if(ok){
+        setFeedback("ok","正确","<b>解析：</b>"+q.explain);
+      }else{
+        let miss=0, extra=0;
+        for(const a of ans) if(!set.has(a)) miss++;
+        for(const s of set) if(!ans.has(s)) extra++;
+        let tip = (miss && extra) ? "你有<b>漏选</b>也有<b>多选</b>。" : miss ? "你有<b>漏选</b>。" : "你有<b>多选</b>。";
+        setFeedback("no","错误", `${tip}<br><b>解析：</b>${q.explain}`);
+      }
+      // ✅ 不拦路，继续前进
+    }
+
+    // 配对：若还没配完，允许前进但提示（你也可改为必须配完）
+    if(q.type==="pair"){
+      const curMap = state.pairMap[q.id] || {};
+      const need = Object.keys(q.answerMap).length;
+      if(Object.keys(curMap).length < need){
+        setFeedback("warn","配对未完成","你还没配完，但可以继续前进。建议回头完成以提高正确率。");
+        // 不return
+      }else{
+        // 若配完但还没判过（通常已判），这里补一次
+        if(!state.judged[q.id]) judgePair(q);
+      }
+    }
+
+    // 前进
+    if(state.qIndex === QUESTIONS[levelId].length-1) nextLevel();
+    else { state.qIndex++; renderQuestion(levelId); }
+  };
+
+  frag.appendChild(btnPrev);
+  frag.appendChild(btnNext);
+  return frag;
+}
+
+function markMultiUI(answer, selected){
+  const opts = document.querySelectorAll(".options .opt");
+  const ans = new Set(answer);
+  const sel = new Set(selected);
+  opts.forEach((op, idx)=>{
+    op.classList.remove("correct","wrong");
+    if(ans.has(idx)) op.classList.add("correct");
+    if(sel.has(idx) && !ans.has(idx)) op.classList.add("wrong");
+  });
+}
+
+/* ===========================
+   15) 关卡切换
+=========================== */
+function nextLevel(){
+  if(state.levelIndex < LEVELS.length-1){
+    state.levelIndex++;
+    state.qIndex = 0;
+    render();
+  }
+}
+function prevLevel(){
+  if(state.levelIndex>0){
+    state.levelIndex--;
+    state.qIndex = 0;
+    render();
+  }
+}
+
+/* ===========================
+   16) 结算页：正确率 + 用时 综合评分
+=========================== */
+function renderResult(){
+  const wrap = document.createElement("div");
+
+  // 用时
+  state.usedSeconds = Math.round((Date.now() - state.startTime)/1000);
+
+  const accuracy = state.totalObjective ? (state.correctCount / state.totalObjective) : 0;
+  const complete = getCompletion();
+
+  // 时间分：10分钟（600秒）为标准；越快越高（0~1）
+  const timeScore = clamp(1 - state.usedSeconds / 600, 0, 1);
+
+  // 综合分：正确率70% + 速度30%
+  state.score = Math.round(accuracy*70 + timeScore*30);
+
+  const advice = makeAdvice(accuracy, timeScore, complete);
+
+  wrap.innerHTML = `
+    <div class="tag">结算页 · 你的学习回声</div>
+    <h1>闯关完成！愿你把中国色写进自己的语言</h1>
+    <p>成绩按照 <b>正确率 + 用时</b> 综合评分（0—100）。表达题不判对错，但计完成度。</p>
+
+    <div class="divider"></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:14px">
+      <div class="card" style="box-shadow:none">
+        <h2>综合评分</h2>
+        <p style="font-size:34px;margin:6px 0 0;font-weight:900;color:var(--ink)">${state.score}<span style="font-size:14px;color:var(--muted)"> / 100</span></p>
+        <p class="muted">正确率：${Math.round(accuracy*100)}% ｜ 用时：${fmtTime(state.usedSeconds)}</p>
+      </div>
+      <div class="card" style="box-shadow:none">
+        <h2>完成度</h2>
+        <p style="font-size:34px;margin:6px 0 0;font-weight:900;color:var(--ink)">${complete}<span style="font-size:14px;color:var(--muted)"> %</span></p>
+        <p class="muted">完成度 = 客观题判定数 + 表达题完成。</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>学习建议</h2>
+    <div class="feedback show" style="display:block">
+      <div class="fbline">
+        <div class="fbicon ok">✨</div>
+        <div>
+          <p class="fbtitle">给你的建议</p>
+          <p class="fbtext">${advice}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>把成绩写入排行榜</h2>
+    <p>将以你填写的信息写入本机排行榜（离线保存）。</p>
+    <div class="btnrow">
+      <button class="primary" id="btnSaveRank">保存到排行榜</button>
+      <button class="ghost" id="btnRestart">再闯一次</button>
+    </div>
+
+    <div class="footnote">
+      <b>温馨提醒：</b>建议你把表达题中的句子再润色一次：加入“意象细节 + 情感点题”，让文字更有“名中有画、色中有情”。<br>
+      如需灵感，随时点开右侧色卡卷轴取句式与关键词。
+    </div>
+  `;
+
+  setTimeout(()=>{
+    $("btnSaveRank").onclick = ()=>{
+      const entry = {
+        name: state.user.name || "匿名同学",
+        cls: state.user.cls || "九年级",
+        score: state.score,
+        accuracy: Math.round(accuracy*100),
+        seconds: state.usedSeconds,
+        complete: getCompletion(),
+        time: Date.now()
+      };
+      addRankEntry(entry);
+      renderRank();
+      alert("已保存到排行榜！");
+    };
+    $("btnRestart").onclick = ()=>{
+      if(confirm("确定重新闯关？（当前答题记录将清空）")){
+        resetAll();
+      }
+    };
+  },0);
+
+  return wrap;
+}
+
+function makeAdvice(accuracy, timeScore, complete){
+  if(complete < 100){
+    return `你还有内容未完成。建议把表达题写满 60—120 字，并至少使用 1 个传统色名。写作时可打开色卡卷轴，借助“意象关键词 + 句式示范”完善语言。`;
+  }
+  if(accuracy >= .9 && timeScore >= .6){
+    return `太棒了！你不仅理解准确，而且完成速度很快。建议下一步：在诗词鉴赏时主动替换“现代颜色词”，用“月白、黛青、胭脂、玄纁”等进行赏析表达，让语言更具画面与文化温度。`;
+  }
+  if(accuracy >= .7){
+    return `你的理解比较扎实。建议回看解析，重点巩固两条逻辑：①“名中有画（来源）”；②“色中有情（意境/情感）”。写作时多用“源于…/营造…”句式，表达会更精准。`;
+  }
+  return `别急，学习中国色需要“看见+说出”。建议你把错题对应的色卡再打开卷轴读一遍：记住“来源—意象—句式”，再回到题目就更容易答对。也可以把表达题写得更具体：加上“光影/声音/气味”等细节。`;
+}
+
+function resetAll(){
+  state.levelIndex=0;
+  state.qIndex=0;
+
+  state.startTime=0;
+  state.usedSeconds=0;
+
+  state.correctCount=0;
+  state.wrongCount=0;
+  state.judged={};
+
+  state.doneObjective=0;
+  state.doneExpress=0;
+
+  state.answers={};
+  state.pairTemp={left:null,right:null};
+  state.pairMap={};
+
+  state.score=0;
+  render();
+}
+
+/* ===========================
+   17) 工具
+=========================== */
+function typeName(t){
+  return t==="single"?"单选题":t==="multi"?"多选题":t==="pair"?"配对题":"表达题";
+}
+function escapeHtml(str){
+  return (str||"").replace(/[&<>"']/g, s=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[s]));
+}
+function fmtTime(sec){
+  const m = Math.floor(sec/60), s = sec%60;
+  return `${m}分${String(s).padStart(2,"0")}秒`;
+}
+function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+</script>
+</body>
+</html>
